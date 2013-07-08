@@ -14,39 +14,7 @@
     <script>var expect = chai.expect</script>
 
     <!-- include source files here... -->
-    <script data-main="scripts/apps/example" src="bower_components/requirejs/require.js"></script>
+    <script data-main="spec/test" src="bower_components/requirejs/require.js"></script>
 
-    <!-- include spec files here... -->
-    <script>
-        require.config(
-            {
-            baseUrl: 'scripts/apps',
-            paths: {
-                testBase: '../..',
-                core: '../core',
-                sandbox: '../sandbox',
-                vendor: '../vendor',
-                modules: '../modules',
-                jquery: '../../bower_components/jquery/jquery'
-            }
-            }
-        );
-
-        require(['require', 'testBase/lib/chai', 'testBase/lib/mocha/mocha'], function(require){
-            mocha.setup({
-                ui: 'bdd',
-                globals:['$', 'jQuery', 'mixin']
-            });
-            
-            require([
-                'testBase/spec/modules/add_item_test'
-            ], function(
-                AddItemTest
-            ){
-                console.log("module: ", AddItemTest);
-                mocha.run();
-            });
-        });
-    </script>
 </body>
 </html>
