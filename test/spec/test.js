@@ -1,5 +1,5 @@
-require.config(
-    {
+/* global mocha */
+require.config({
     baseUrl: 'scripts/apps',
     paths: {
         testBase: '../..',
@@ -9,8 +9,7 @@ require.config(
         modules: '../modules',
         jquery: '../../bower_components/jquery/jquery'
     }
-    }
-);
+});
 
 mocha.setup({
     ui: 'bdd',
@@ -19,9 +18,8 @@ mocha.setup({
 
 require([
     'testBase/spec/modules/add_item_test'
-], function(
-    AddItemTest
-){
+], function(){
+    'use strict';
     //console.log("module: ", AddItemTest);
     mocha.run();
 });
