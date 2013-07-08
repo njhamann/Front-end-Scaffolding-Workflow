@@ -75,7 +75,8 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'test')
+                            mountFolder(connect, 'test'),
+                            mountFolder(connect, yeomanConfig.app) //added for bower scripts
                         ];
                     }
                 }
@@ -122,6 +123,8 @@ module.exports = function (grunt) {
         mocha: {
             all: {
                 options: {
+                    reporter: 'Nyan',
+                    log: true,
                     run: true,
                     urls: ['http://localhost:<%= connect.options.port %>/index.html']
                 }
@@ -350,6 +353,16 @@ module.exports = function (grunt) {
     grunt.registerTask('server', function (target) {
         if (target === 'dist') {
             return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
+        } else if(target === 'test') {
+            return grunt.task.run([
+                'clean:server',
+                'concurrent:test',
+                'autoprefixer',
+                'connect:test',
+                'mocha',
+                'open',
+                'watch'
+            ]);
         }
 
         grunt.task.run([
